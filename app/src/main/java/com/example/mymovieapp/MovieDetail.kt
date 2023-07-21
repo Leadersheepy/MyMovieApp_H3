@@ -18,7 +18,6 @@ import com.example.mymovieapp.data.Movies
 
 @Composable
 fun MovieDetail(movie: Movies, navController: NavHostController) {
-    var estFavorit by remember { mutableStateOf(movie.estFavorit) }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -69,13 +68,13 @@ fun MovieDetail(movie: Movies, navController: NavHostController) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Icon(
                     painter = painterResource(
-                        id = if (estFavorit) R.drawable.ic_coeur else R.drawable.ic_coeur2
+                        id = if (movie.estFavorit) R.drawable.ic_coeur else R.drawable.ic_coeur2
                     ),
                     contentDescription = "Favori",
                     modifier = Modifier
                         .size(32.dp)
                         .clickable {
-                            estFavorit = !estFavorit
+                            movie.estFavorit = !movie.estFavorit
                         }
                 )
             }

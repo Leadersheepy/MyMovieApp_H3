@@ -6,7 +6,7 @@ data class Movies(
     val imageRes: Int,
     val description: String,
     val rating: Float,
-    val estFavorit: Boolean,
+    var estFavorit: Boolean,
     val video: Boolean,
     val aLaffiche: Boolean,
     val estPopulaire: Boolean,
