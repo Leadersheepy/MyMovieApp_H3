@@ -16,7 +16,7 @@ fun BottomNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            AllMovies()
+            AllMovies(navController)
         }
         composable(route = BottomBarScreen.Library.route) {
             Library()
