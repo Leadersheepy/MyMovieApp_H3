@@ -16,9 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +32,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.mymovieapp.data.Movies
 import com.example.mymovieapp.data.allMovies
-import com.example.mymovieapp.data.nowPlayingMovies
 import com.example.mymovieapp.data.topRatedMovies
 import com.example.mymovieapp.data.upcomingMovies
 import okhttp3.OkHttpClient
@@ -55,6 +52,20 @@ val response = client.newCall(request).execute()*/
 @Composable
 fun AllMovies(navController: NavHostController) {
     Scaffold(
+        topBar = {
+            TopAppBar(
+                backgroundColor = Color.White,
+                title = {Text(text="Movie App")},
+                navigationIcon = {
+                    IconButton(onClick = { }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_search),
+                            contentDescription = "Search"
+                        )
+                    }
+                }
+            )
+        },
         content = { padding ->
             MovieList(Modifier.padding(padding), navController)
         }
@@ -84,13 +95,12 @@ fun MovieList(modifier: Modifier, navController: NavHostController) {
         }
         item {
             Spacer(modifier = Modifier.height(16.dp)) // Add spacing after the title
-            MovieCategory("Tous les films", allMovies, navController)
+            MovieCategory("Now playing", allMovies, navController)
             Spacer(modifier = Modifier.height(32.dp)) // Add more spacing between categories
             MovieCategory("Top Rated", topRatedMovies, navController)
             Spacer(modifier = Modifier.height(32.dp))
             MovieCategory("Upcoming", upcomingMovies, navController)
             Spacer(modifier = Modifier.height(32.dp))
-            MovieCategory("Now Playing", nowPlayingMovies, navController)
         }
     }
 }

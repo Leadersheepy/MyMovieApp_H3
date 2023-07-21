@@ -1,9 +1,10 @@
 package com.example.mymovieapp
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -11,17 +12,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.mymovieapp.data.Movies
 
 @Composable
-fun MovieDetail(movie: Movies) {
+fun MovieDetail(movie: Movies, navController: NavHostController) {
+    var estFavorit by remember { mutableStateOf(movie.estFavorit) }
     Scaffold(
         topBar = {
             TopAppBar(
                 backgroundColor = Color.White,
                 title = { Text(text = movie.title) },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle back navigation */ }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = "Back"
@@ -63,7 +67,17 @@ fun MovieDetail(movie: Movies) {
                     color = Color.Gray
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                // Add more movie details as needed
+                Icon(
+                    painter = painterResource(
+                        id = if (estFavorit) R.drawable.ic_coeur else R.drawable.ic_coeur2
+                    ),
+                    contentDescription = "Favori",
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clickable {
+                            estFavorit = !estFavorit
+                        }
+                )
             }
         }
     )

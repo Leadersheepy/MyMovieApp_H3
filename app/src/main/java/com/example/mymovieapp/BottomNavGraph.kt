@@ -28,7 +28,7 @@ fun BottomNavGraph(navController: NavHostController) {
         ) { backStackEntry ->
             val movieId = backStackEntry.arguments?.getInt("movieId") ?: return@composable
             val movie = allMovies.find { it.id == movieId } ?: return@composable
-            MovieDetail(movie = movie)
+            MovieDetail(movie = movie, navController)
         }
     }
 }
